@@ -1,23 +1,25 @@
 #include "color.h"
 #include "guess.h"
-#include "completion.h"
+
+#include "Servo.h"
 
 using color::ColorHandler;
 using guess::GuessHandler;
-using completion::CompletionHandler;
 
-ColorHandler      colorHandler;
-GuessHandler      guessHandler;
-CompletionHandler completionHandler;
+ColorHandler colorHandler;
+GuessHandler guessHandler;
+
+Servo servo;
+bool completed = false;
 
 void setup() {
     colorHandler.setup();
     guessHandler.setup();
-    completionHandler.setup();
+    Serial.begin(9600);
 }
 
 void loop() {
-    if (completionHandler.getTriggered()) {
+    if (completed) {
         return;
     }
 
@@ -25,6 +27,14 @@ void loop() {
     guessHandler.update();
 
     if (colorHandler.getCompleted() && guessHandler.getCompleted()) {
-        completionHandler.trigger();
+        completed = true;
+
+        servo.attach(10);
+        servo.write(180);
+
+        delay(125);
+
+        servo.write(90);
+        servo.detach();
     }
 }
