@@ -21,9 +21,9 @@ void ColorHandler::update() {
     }
 
     completed =
-        utils::buttonPressed(PIN_R) &&
         utils::buttonPressed(PIN_G) &&
-        !utils::buttonPressed(PIN_B);
+        utils::buttonPressed(PIN_B) &&
+        !utils::buttonPressed(PIN_R);
 }
 
 bool ColorHandler::getCompleted() {
