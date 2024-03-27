@@ -50,7 +50,7 @@ void GuessHandler::update() {
     completed =
         buffer[0] == PIN_HM &&
         buffer[1] == PIN_HM &&
-        buffer[2] == PIN_HM &&
+        buffer[2] == PIN_NS &&
         buffer[3] == PIN_AG &&
         buffer[4] == PIN_TZ;
 }
